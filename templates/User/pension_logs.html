@@ -1,0 +1,59 @@
+{% extends 'User/index.html' %}
+{% block body %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<button onClick="printdiv('printable_div_id');" class="bt-3">PRINT</button>
+<div id='printable_div_id'>
+<table class="table table-bordered table-primary mt-3">
+<tr>
+    <td colspan="4" align="center">
+        <h2>PENSION LOGS</h2>
+    </td>
+</tr>
+<tr>
+    <td colspan="3">
+        Name : {{ data2.name }}<br>
+        Phone : {{ data2.phone }}<br>
+        Email : {{ data2.email }}
+    </td>
+    <td>
+        <img src="{{ data2.photo }}" height="100" width="100" />
+    </td>
+</tr>
+  <tr class="bg-primary border border-white text-white">
+    <th scope="col">#</th>
+    <th scope="col">Date</th>
+    <th scope="col">Time</th>
+    <th scope="col">Amount</th>
+  </tr>
+    {% for i in data %}
+  <tr>
+    <td>{{ forloop.counter }}</td>
+    <td>{{ i.date }}</td>
+    <td>{{ i.time }}</td>
+    <td>{{ i.amount }}</td>
+  </tr>
+    {% endfor %}
+</table>
+</div>
+<script>
+function printdiv(elem) {
+  var header_str = '<html><head><title>' + document.title  + '</title></head><body>';
+  var footer_str = '</body></html>';
+  var new_str = document.getElementById(elem).innerHTML;
+  var old_str = document.body.innerHTML;
+  document.body.innerHTML = header_str + new_str + footer_str;
+  window.print();
+  document.body.innerHTML = old_str;
+  return false;
+}
+</script>
+</body>
+</html>
+{% endblock %}

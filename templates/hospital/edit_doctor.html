@@ -1,0 +1,62 @@
+{% extends 'hospital/index.html' %}
+{% block body %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<form id="form1" name="form1" method="post" enctype="multipart/form-data" action="/edit_doctor_post/{{ data.id }}#view_spot">
+    {% csrf_token %}
+  <table width="500" cellpadding="10">
+    <tr>
+      <!-- Name Field -->
+      <th width="167" scope="row"><label for="textfield">Name:</label></th>
+      <td><input type="text" name="textfield" id="textfield" value="{{ data.name }}" required class="form-control bg-white border border-primary" placeholder="Name"/></td>
+    </tr>
+    <tr>
+      <!-- Specialization Field -->
+      <th width="167" scope="row"><label for="textfield">Specialization:</label></th>
+      <td><input type="text" name="sp" id="textfield" value="{{ data.specializaion }}" required class="form-control bg-white border border-primary" placeholder="Specialization"/></td>
+    </tr>
+    <tr>
+      <!-- Qualification Field -->
+      <th width="167" scope="row"><label for="textfield">Qualification:</label></th>
+      <td><input type="text" name="q" id="textfield" value="{{ data.qualification }}" required class="form-control bg-white border border-primary" placeholder="Qualification"/></td>
+    </tr>
+    <tr>
+      <!-- Email Field -->
+      <th width="167" scope="row"><label for="textfield2">Email:</label></th>
+      <td><input type="email" name="textfield2" class="form-control bg-white border border-primary" value="{{ data.email }}" readonly pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" id="textfield2" placeholder="Email"/></td>
+    </tr>
+    <tr>
+      <!-- Phone Field -->
+      <th width="167" scope="row"><label for="textfield3">Phone:</label></th>
+      <td><input type="text" name="textfield3" id="textfield3" required pattern="[0-9]{10}" value="{{ data.phone }}" class="form-control bg-white border border-primary" placeholder="Phone"/></td>
+    </tr>
+    <tr>
+      <!-- Place Field -->
+      <th width="167" scope="row"><label for="textfield4">Place:</label></th>
+      <td><input type="text" name="textfield4" id="textfield4" required value="{{ data.place }}" class="form-control bg-white border border-primary" placeholder="Place"/></td>
+    </tr>
+    <tr>
+      <!-- Post Field -->
+      <th width="167" scope="row"><label for="textfield5">Post:</label></th>
+      <td><input type="text" name="textfield5" id="textfield5" required value="{{ data.post }}" class="form-control bg-white border border-primary" placeholder="Post"/></td>
+    </tr>
+    <tr>
+      <!-- Pin Field -->
+      <th width="167" scope="row"><label for="textfield6">Pin:</label></th>
+      <td><input type="text" name="textfield6" id="textfield6" required value="{{ data.pin }}" pattern="[0-9]{6}" class="form-control bg-white border border-primary" placeholder="Pin" /></td>
+    </tr>
+    <tr>
+      <!-- Submit Button -->
+      <th colspan="2" scope="row"><input type="submit" class="btn btn-primary w-100 py-3" name="button" id="button" value="Update" /></th>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
+{% endblock %}

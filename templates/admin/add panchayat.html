@@ -1,0 +1,115 @@
+{% extends 'admin/index.html' %}
+{% block body %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Disability Aid</title>
+</head>
+
+<body>
+<form id="form1" name="form1" method="post" enctype="multipart/form-data" action="/add_panchayat_post">
+    {% csrf_token %}
+  <table width="500" cellpadding="10">
+    <tr>
+      <th scope="row"><label for="textfield">Name:</label></th>
+      <td><input type="text" name="textfield" id="textfield" required class="form-control bg-white border border-primary" placeholder="Name"/></td>
+    </tr>
+    <tr>
+      <th scope="row"><label for="textfield2">Email:</label></th>
+      <td><input type="email" name="textfield2" class="form-control bg-white border border-primary" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" id="textfield2" placeholder="Email"/></td>
+    </tr>
+    <tr>
+      <th scope="row"><label for="textfield3">Phone:</label></th>
+      <td><input type="text" name="textfield3" id="textfield3" required pattern="[0-9]{10}" class="form-control bg-white border border-primary" placeholder="Phone"/></td>
+    </tr>
+    <tr>
+      <th scope="row"><label for="textfield4">Place:</label></th>
+      <td><input type="text" name="textfield4" id="textfield4" required class="form-control bg-white border border-primary" placeholder="Place"/></td>
+    </tr>
+    <tr>
+      <th scope="row"><label for="textfield5">Post:</label></th>
+      <td><input type="text" name="textfield5" id="textfield5" required class="form-control bg-white border border-primary" placeholder="Post"/></td>
+    </tr>
+    <tr>
+      <th scope="row"><label for="textfield6">Pin:</label></th>
+      <td><input type="text" name="textfield6" id="textfield6" required pattern="[0-9]{6}" class="form-control bg-white border border-primary" placeholder="Pin" /></td>
+    </tr>
+    <tr>
+      <th colspan="2" scope="row"><input type="submit" class="btn btn-primary w-100 py-3" name="button" id="button" value="Add" /></th>
+    </tr>
+  </table>
+</form>
+
+<script>
+document.getElementById('textfield3').addEventListener('input', function(event) {
+    var phoneNumber = event.target.value;
+    // Check if the input matches the pattern for a 10-digit phone number starting with 6, 7, 8, or 9
+    if (!/^[6-9]\d{0,9}$/.test(phoneNumber)) {
+        // If not, prevent further input
+        event.target.value = phoneNumber.slice(0, -1); // Remove the last character
+    }
+});
+</script>
+
+
+
+
+<script>
+document.getElementById('textfield6').addEventListener('keydown', function(event) {
+    // Allow backspace key
+    if (event.key === 'Backspace') {
+        return;
+    }
+    // Prevent further input if pincode has reached 6 digits
+    if (event.target.value.length >= 6) {
+        event.preventDefault();
+    }
+    // Only allow numbers and disallow other characters
+    if (!/[0-9]/.test(event.key)) {
+        event.preventDefault();
+    }
+    // Ensure the first digit is 6
+    if (event.target.value.length === 0 && event.key !== '6') {
+        event.preventDefault();
+    }
+});
+</script>
+
+<script>
+    document.getElementById('textfield4').addEventListener('input', function(event) {
+        var district = event.target.value;
+        // Check if the input matches the pattern for letters only
+        if (!/^[a-zA-Z\s]*$/.test(district)) {
+            // If not, prevent further input
+            event.target.value = district.replace(/[^a-zA-Z\s]/g, ''); // Remove non-letter characters
+        }
+    });
+</script>
+
+<script>
+    document.getElementById('textfield').addEventListener('input', function(event) {
+        var name = event.target.value;
+        // Check if the input matches the pattern for letters only
+        if (!/^[a-zA-Z\s]*$/.test(name)) {
+            // If not, prevent further input
+            event.target.value = name.replace(/[^a-zA-Z\s]/g, ''); // Remove non-letter characters
+        }
+    });
+</script>
+
+<script>
+    document.getElementById('textfield2').addEventListener('input', function(event) {
+        var email = event.target.value;
+        // Check if the input matches the pattern for a valid email address
+        if (!/^([a-zA-Z0-9._%+-]+@(?:mca\.ajce\.in|[^@]+\.com))$/.test(email)) {
+            // If not, prevent further input
+            event.target.value = email.replace(/[^a-zA-Z0-9.@]/g, ''); // Remove non-allowed characters
+        }
+    });
+</script>
+
+
+</body>
+</html>
+{% endblock %}
